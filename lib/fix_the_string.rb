@@ -1,16 +1,14 @@
 def fix_the_string(str)
-    stack = []
-
-    str.each_char do |char|
-        if !stack.empty? && char != stack.last && char.upcase == stack.last.upcase
-            stack.pop
-        else
-            stack.push(char)
+    continue = true
+    while continue
+        continue = false
+        (str.size - 1).times do |i|
+            if (str[i] != str[i + 1]) && (str[i].upcase == str[i + 1].upcase)
+                str = str[0...i] + str[i + 2..-1]
+                continue = true
+                break
+            end
         end
     end
-
-    result = ''
-    result = stack.pop + result until stack.empty?
-
-    result
+    str
 end
